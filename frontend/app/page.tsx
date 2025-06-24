@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Header from "@/components/header/header";
-import { FilterSidebar } from "@/components/filter/filter-sidebar";
+import Header from "@/app/_components/header/header";
+import { FilterSidebar } from "@/app/_components/filter/filter-sidebar";
 import { useGetJobs } from "@/queries/use-get-jobs";
-import { useDebounce } from "@/lib/hooks/use-debounce";
-import { JobCard } from "@/components/job-card";
 import { SearchBar } from "@/components/search-bar";
+import { JobCard } from "./_components/job-card";
 
 export default function HomePage() {
   const { data: jobs = [], isLoading } = useGetJobs();
