@@ -1,76 +1,15 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Header from "@/components/header/header";
+import { FilterSidebar } from "@/components/filter/filter-sidebar";
+import { useGetJobs } from "@/queries/use-get-jobs";
+import { useDebounce } from "@/lib/hooks/use-debounce";
 import { JobCard } from "@/components/job-card";
 import { SearchBar } from "@/components/search-bar";
-import Header from "@/components/Header/header";
-import { FilterSidebar } from "@/components/Filter/filter-sidebar";
-
-// Sample job data - replace with your actual data source
-const jobs = [
-  {
-    title: "Senior Frontend Developer",
-    company: "TechCorp Inc.",
-    location: "San Francisco, CA",
-    link: "https://example.com/job1",
-  },
-  {
-    title: "Full Stack Engineer",
-    company: "StartupXYZ",
-    location: "New York, NY",
-    link: "https://example.com/job2",
-  },
-  {
-    title: "React Developer",
-    company: "Digital Solutions",
-    location: "Remote",
-    link: "https://example.com/job3",
-  },
-  {
-    title: "Software Engineer",
-    company: "Innovation Labs",
-    location: "Austin, TX",
-    link: "https://example.com/job4",
-  },
-  {
-    title: "Frontend Developer",
-    company: "WebTech Solutions",
-    location: "Seattle, WA",
-    link: "https://example.com/job5",
-  },
-  {
-    title: "UI/UX Developer",
-    company: "Design Studio",
-    location: "Los Angeles, CA",
-    link: "https://example.com/job6",
-  },
-  {
-    title: "Backend Developer",
-    company: "TechCorp Inc.",
-    location: "San Francisco, CA",
-    link: "https://example.com/job7",
-  },
-  {
-    title: "DevOps Engineer",
-    company: "CloudTech",
-    location: "Remote",
-    link: "https://example.com/job8",
-  },
-  {
-    title: "Mobile Developer",
-    company: "AppStudio",
-    location: "Miami, FL",
-    link: "https://example.com/job9",
-  },
-  {
-    title: "Data Scientist",
-    company: "DataCorp",
-    location: "Boston, MA",
-    link: "https://example.com/job10",
-  },
-];
 
 export default function HomePage() {
+  const { data: jobs = [], isLoading } = useGetJobs();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedCompany, setSelectedCompany] = useState("");
@@ -80,17 +19,17 @@ export default function HomePage() {
   const locations = useMemo(() => {
     const uniqueLocations = [...new Set(jobs.map((job) => job.location))];
     return uniqueLocations.sort();
-  }, []);
+  }, [jobs]);
 
   const companies = useMemo(() => {
     const uniqueCompanies = [...new Set(jobs.map((job) => job.company))];
     return uniqueCompanies.sort();
-  }, []);
+  }, [jobs]);
 
   const jobRoles = useMemo(() => {
     const uniqueJobRoles = [...new Set(jobs.map((job) => job.title))];
     return uniqueJobRoles.sort();
-  }, []);
+  }, [jobs]);
 
   // Filter jobs based on search and filter criteria
   const filteredJobs = useMemo(() => {
@@ -118,7 +57,7 @@ export default function HomePage() {
         matchesSearch && matchesLocation && matchesCompany && matchesJobRole
       );
     });
-  }, [searchTerm, selectedLocation, selectedCompany, selectedJobRole]);
+  }, [searchTerm, selectedLocation, selectedCompany, selectedJobRole, jobs]);
 
   const handleClearFilters = () => {
     setSearchTerm("");
@@ -126,6 +65,13 @@ export default function HomePage() {
     setSelectedCompany("");
     setSelectedJobRole("");
   };
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-gray-500">Loading jobs...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -187,9 +133,9 @@ export default function HomePage() {
               </div>
             ) : (
               <div className="space-y-4">
-                {filteredJobs.map((job, index) => (
+                {filteredJobs.map((job) => (
                   <JobCard
-                    key={`${job.company}-${job.title}-${index}`}
+                    key={job.id}
                     title={job.title}
                     company={job.company}
                     location={job.location}

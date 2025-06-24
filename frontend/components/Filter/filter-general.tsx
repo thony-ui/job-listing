@@ -20,18 +20,18 @@ import {
 } from "@/components/ui/popover";
 
 interface ICompanyProps {
-  companies: string[];
-  selectedCompany: string;
-  onCompanyChange: (value: string) => void;
+  value: string[];
+  selectedValue: string;
+  onValueChange: (value: string) => void;
 
   open: boolean;
   setOpen: (open: boolean) => void;
 }
 
-export function CompanyFilter({
-  companies,
-  selectedCompany,
-  onCompanyChange,
+export function GeneralFilter({
+  value,
+  selectedValue,
+  onValueChange,
   open,
   setOpen,
 }: ICompanyProps) {
@@ -44,7 +44,7 @@ export function CompanyFilter({
           aria-expanded={open}
           className="w-[250px] sm:w-[270px] justify-between text-gray-500"
         >
-          {selectedCompany !== "" ? selectedCompany : "Select company"}
+          {selectedValue !== "" ? selectedValue : "Select company"}
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -54,13 +54,13 @@ export function CompanyFilter({
           <CommandList>
             <CommandEmpty>No company found.</CommandEmpty>
             <CommandGroup>
-              {companies.map((company) => (
+              {value.map((company) => (
                 <CommandItem
                   key={company}
                   value={company}
                   onSelect={(currentValue) => {
-                    onCompanyChange(
-                      currentValue === selectedCompany ? "" : currentValue
+                    onValueChange(
+                      currentValue === selectedValue ? "" : currentValue
                     );
                     setOpen(false);
                   }}
@@ -68,7 +68,7 @@ export function CompanyFilter({
                   <CheckIcon
                     className={cn(
                       "mr-2 h-4 w-4",
-                      selectedCompany === company ? "opacity-100" : "opacity-0"
+                      selectedValue === company ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {company}

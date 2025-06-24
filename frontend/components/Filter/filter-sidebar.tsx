@@ -1,20 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { X, MapPin, Building2, Workflow } from "lucide-react";
+import { MapPin, Building2, Workflow } from "lucide-react";
 import { useState } from "react";
-import { CompanyFilter } from "./filter-company";
-import { JobFilter } from "./filter-job";
-import { LocationFilter } from "./filter-location";
+import { GeneralFilter } from "./filter-general";
+import RemoveFilter from "./remove-filter";
 
 interface FilterSidebarProps {
   selectedLocation: string;
@@ -26,9 +18,9 @@ interface FilterSidebarProps {
   onJobRoleChange: (value: string) => void;
   locations: string[];
   companies: string[];
+  jobRoles: string[];
   onClearFilters: () => void;
   hasActiveFilters: boolean;
-  jobRoles: string[];
 }
 
 export function FilterSidebar({
@@ -74,10 +66,10 @@ export function FilterSidebar({
             </label>
           </div>
 
-          <LocationFilter
-            locations={locations}
-            selectedLocation={selectedLocation}
-            onLocationChange={onLocationChange}
+          <GeneralFilter
+            value={locations}
+            selectedValue={selectedLocation}
+            onValueChange={onLocationChange}
             open={openLocationFilter}
             setOpen={setOpenLocationFilter}
           />
@@ -91,10 +83,10 @@ export function FilterSidebar({
             <Building2 className="h-4 w-4 text-gray-500" />
             <label className="text-sm font-medium text-gray-700">Company</label>
           </div>
-          <CompanyFilter
-            companies={companies}
-            selectedCompany={selectedCompany}
-            onCompanyChange={onCompanyChange}
+          <GeneralFilter
+            value={companies}
+            selectedValue={selectedCompany}
+            onValueChange={onCompanyChange}
             open={openCompanyFilter}
             setOpen={setOpenCompanyFilter}
           />
@@ -109,10 +101,10 @@ export function FilterSidebar({
               Job Role
             </label>
           </div>
-          <JobFilter
-            jobRoles={jobRoles}
-            selectedJobRole={selectedJobRole}
-            onJobRoleChange={onJobRoleChange}
+          <GeneralFilter
+            value={jobRoles}
+            selectedValue={selectedJobRole}
+            onValueChange={onJobRoleChange}
             open={openJobRoleFilter}
             setOpen={setOpenJobRoleFilter}
           />
@@ -127,43 +119,22 @@ export function FilterSidebar({
               </p>
               <div className="space-y-2">
                 {selectedLocation && (
-                  <div className="flex items-center justify-between bg-blue-50 px-3 py-2 rounded-md">
-                    <span className="text-sm text-blue-700">
-                      {selectedLocation}
-                    </span>
-                    <button
-                      onClick={() => onLocationChange("")}
-                      className="text-blue-500 hover:text-blue-700"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
+                  <RemoveFilter
+                    selectedFilter={selectedLocation}
+                    onFilterChange={onLocationChange}
+                  />
                 )}
                 {selectedCompany && (
-                  <div className="flex items-center justify-between bg-green-50 px-3 py-2 rounded-md">
-                    <span className="text-sm text-green-700">
-                      {selectedCompany}
-                    </span>
-                    <button
-                      onClick={() => onCompanyChange("")}
-                      className="text-green-500 hover:text-green-700"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
+                  <RemoveFilter
+                    selectedFilter={selectedCompany}
+                    onFilterChange={onCompanyChange}
+                  />
                 )}
                 {selectedJobRole && (
-                  <div className="flex items-center justify-between bg-purple-50 px-3 py-2 rounded-md">
-                    <span className="text-sm text-purple-700">
-                      {selectedJobRole}
-                    </span>
-                    <button
-                      onClick={() => onJobRoleChange("")}
-                      className="text-purple-500 hover:text-purple-700"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
+                  <RemoveFilter
+                    selectedFilter={selectedJobRole}
+                    onFilterChange={onJobRoleChange}
+                  />
                 )}
               </div>
             </div>

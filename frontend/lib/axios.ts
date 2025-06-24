@@ -12,7 +12,6 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(async (config) => {
   const supabase = createClient();
   const { data } = await supabase.auth.getSession();
-  console.log(data?.session?.access_token);
 
   if (data?.session?.access_token) {
     // add the access token to the request headers
