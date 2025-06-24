@@ -4,8 +4,8 @@ import { useState, useMemo } from "react";
 import Header from "@/app/_components/header/header";
 import { FilterSidebar } from "@/app/_components/filter/filter-sidebar";
 import { useGetJobs } from "@/queries/use-get-jobs";
-import { SearchBar } from "@/components/search-bar";
 import { JobCard } from "./_components/job-card";
+import { SearchBar } from "./_components/search-bar";
 
 export default function HomePage() {
   const { data: jobs = [], isLoading } = useGetJobs();
