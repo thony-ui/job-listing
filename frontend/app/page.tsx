@@ -3,8 +3,8 @@
 import { useState, useMemo } from "react";
 import { JobCard } from "@/components/job-card";
 import { SearchBar } from "@/components/search-bar";
-import { FilterSidebar } from "@/components/filter-sidebar";
 import Header from "@/components/Header/header";
+import { FilterSidebar } from "@/components/Filter/filter-sidebar";
 
 // Sample job data - replace with your actual data source
 const jobs = [
