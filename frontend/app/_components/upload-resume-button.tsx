@@ -8,6 +8,7 @@ import { useUploadDocument } from "@/mutations/use-upload-document";
 
 export default function UploadResume() {
   const [file, setFile] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { mutateAsync: uploadDocument } = useUploadDocument();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -20,19 +21,21 @@ export default function UploadResume() {
       toast("Only PDF files are allowed");
       return;
     }
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("resume", file);
 
     try {
       await uploadDocument(formData);
       toast.success("Resume uploaded successfully");
-
       setFile(null);
+    } catch (err) {
+      toast.error("Error uploading resume");
+    } finally {
+      setIsLoading(false);
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
-    } catch (err) {
-      toast.error("Error uploading resume");
     }
   };
 
@@ -48,9 +51,9 @@ export default function UploadResume() {
       <Button
         onClick={handleUpload}
         className="cursor-pointer"
-        disabled={!file}
+        disabled={!file || isLoading}
       >
-        Upload
+        {isLoading ? "Uploading..." : "Upload"}
       </Button>
     </div>
   );
