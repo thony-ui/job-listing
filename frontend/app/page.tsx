@@ -6,6 +6,7 @@ import { FilterSidebar } from "@/app/_components/filter/filter-sidebar";
 import { useGetJobs } from "@/queries/use-get-jobs";
 import { JobCard } from "./_components/job-card";
 import { SearchBar } from "./_components/search-bar";
+import UploadResume from "./_components/upload-resume-button";
 
 export default function HomePage() {
   const { data: jobs = [], isLoading } = useGetJobs();
@@ -107,6 +108,22 @@ export default function HomePage() {
                 searchTerm={searchTerm}
                 onSearchChange={setSearchTerm}
               />
+            </div>
+
+            {/* Upload Resume Section */}
+            <div className="mb-8 p-6 bg-white rounded-lg shadow-sm border">
+              <div className="text-center">
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                  Get Noticed by Employers
+                </h2>
+                <p className="text-gray-600 mb-4">
+                  Upload your resume to stand out and get matched with relevant
+                  opportunities
+                </p>
+                <div className="flex justify-center">
+                  <UploadResume />
+                </div>
+              </div>
             </div>
 
             {/* Results Count */}
