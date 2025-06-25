@@ -7,6 +7,7 @@ import { useGetJobs } from "@/queries/use-get-jobs";
 import { JobCard } from "./_components/job-card";
 import { SearchBar } from "./_components/search-bar";
 import UploadResumeCard from "./_components/upload-resume-card";
+import { Card } from "@/components/ui/card";
 
 export default function HomePage() {
   const { data: jobs = [], isLoading } = useGetJobs();
@@ -103,15 +104,9 @@ export default function HomePage() {
           {/* Main Job Listings */}
           <main className="flex-1 min-w-0">
             {/* Search Bar */}
-            <div className="mb-6">
-              <SearchBar
-                searchTerm={searchTerm}
-                onSearchChange={setSearchTerm}
-              />
-            </div>
 
             {/* Upload Resume Section */}
-            <div className="mb-8 p-6 bg-white rounded-lg shadow-sm border">
+            <Card className="mb-8 p-6 bg-white shadow-sm border">
               <div className="text-center">
                 <h2 className="text-xl font-semibold text-gray-900 mb-2">
                   Get Noticed by Employers
@@ -124,6 +119,12 @@ export default function HomePage() {
                   <UploadResumeCard />
                 </div>
               </div>
+            </Card>
+            <div className="mb-6">
+              <SearchBar
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+              />
             </div>
 
             {/* Results Count */}
