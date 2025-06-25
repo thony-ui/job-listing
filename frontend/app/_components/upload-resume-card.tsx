@@ -47,6 +47,7 @@ export default function UploadResumeCard() {
         type="file"
         accept="application/pdf"
         onChange={(e) => setFile(e.target.files?.[0] || null)}
+        className="cursor-pointer"
       />
       <Button
         onClick={handleUpload}
