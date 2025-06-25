@@ -26,6 +26,8 @@ interface ICompanyProps {
 
   open: boolean;
   setOpen: (open: boolean) => void;
+
+  placeholder: string;
 }
 
 export function GeneralFilter({
@@ -34,6 +36,7 @@ export function GeneralFilter({
   onValueChange,
   open,
   setOpen,
+  placeholder,
 }: ICompanyProps) {
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -44,13 +47,13 @@ export function GeneralFilter({
           aria-expanded={open}
           className="w-[250px] sm:w-[270px] justify-between text-gray-500"
         >
-          {selectedValue !== "" ? selectedValue : "Select company"}
+          {selectedValue !== "" ? selectedValue : placeholder}
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[250px] sm:w-[270px] p-0">
         <Command>
-          <CommandInput placeholder="Search company..." />
+          <CommandInput placeholder={placeholder} />
           <CommandList>
             <CommandEmpty>No company found.</CommandEmpty>
             <CommandGroup>

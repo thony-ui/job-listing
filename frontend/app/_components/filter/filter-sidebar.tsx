@@ -72,6 +72,7 @@ export function FilterSidebar({
             onValueChange={onLocationChange}
             open={openLocationFilter}
             setOpen={setOpenLocationFilter}
+            placeholder="Search location..."
           />
         </div>
 
@@ -89,6 +90,7 @@ export function FilterSidebar({
             onValueChange={onCompanyChange}
             open={openCompanyFilter}
             setOpen={setOpenCompanyFilter}
+            placeholder="Search company..."
           />
         </div>
         <Separator />
@@ -107,6 +109,7 @@ export function FilterSidebar({
             onValueChange={onJobRoleChange}
             open={openJobRoleFilter}
             setOpen={setOpenJobRoleFilter}
+            placeholder="Search job role..."
           />
         </div>
         {/* Active Filters Display */}
