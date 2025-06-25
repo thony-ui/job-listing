@@ -6,7 +6,7 @@ import { FilterSidebar } from "@/app/_components/filter/filter-sidebar";
 import { useGetJobs } from "@/queries/use-get-jobs";
 import { JobCard } from "./_components/job-card";
 import { SearchBar } from "./_components/search-bar";
-import UploadResume from "./_components/upload-resume-button";
+import UploadResumeCard from "./_components/upload-resume-card";
 
 export default function HomePage() {
   const { data: jobs = [], isLoading } = useGetJobs();
@@ -121,7 +121,7 @@ export default function HomePage() {
                   opportunities
                 </p>
                 <div className="flex justify-center">
-                  <UploadResume />
+                  <UploadResumeCard />
                 </div>
               </div>
             </div>

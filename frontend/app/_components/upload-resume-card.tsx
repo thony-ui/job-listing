@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useUploadDocument } from "@/mutations/use-upload-document";
 
-export default function UploadResume() {
+export default function UploadResumeCard() {
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { mutateAsync: uploadDocument } = useUploadDocument();
