@@ -1,20 +1,5 @@
 import { DocumentService } from "../domain/document.service";
 
-jest.mock("../../../logger", () => ({
-  info: jest.fn(),
-  error: jest.fn(),
-  warn: jest.fn(),
-  debug: jest.fn(),
-}));
-
-beforeAll(() => {
-  jest.spyOn(console, "log").mockImplementation(() => {});
-});
-
-afterAll(() => {
-  jest.restoreAllMocks();
-});
-
 describe("Document Service", () => {
   let documentService: DocumentService;
   beforeEach(() => {

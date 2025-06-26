@@ -3,21 +3,6 @@ import { JobsRepository } from "../domain/jobs.repository";
 import { JobsService } from "../domain/jobs.service";
 import type { Request, Response, NextFunction } from "express";
 
-jest.mock("../../../logger", () => ({
-  info: jest.fn(),
-  error: jest.fn(),
-  warn: jest.fn(),
-  debug: jest.fn(),
-}));
-
-beforeAll(() => {
-  jest.spyOn(console, "log").mockImplementation(() => {});
-});
-
-afterAll(() => {
-  jest.restoreAllMocks();
-});
-
 describe("Jobs Service Positive test case", () => {
   let jobsService: JobsService;
   beforeEach(() => {
