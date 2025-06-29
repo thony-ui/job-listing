@@ -1,6 +1,8 @@
+name: job-listing-backend
+
 version: "3.9"
 services:
-  app:
+  api:
     build: .
     ports:
       - "8000:8000"
