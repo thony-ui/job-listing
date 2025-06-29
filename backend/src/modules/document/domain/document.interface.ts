@@ -6,4 +6,6 @@ export interface IUploadResume {
 
 export interface IDocumentService {
   uploadResume(data: IUploadResume): Promise<void>;
+
+  convertResumeToHTML(userId: string): Promise<unknown>;
 }

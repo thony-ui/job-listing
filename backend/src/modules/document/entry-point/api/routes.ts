@@ -16,6 +16,10 @@ export function defineDocumentRoutes(expressApp: Application) {
     upload.single("resume"),
     documentController.uploadResume
   );
+  documentRouter.post(
+    "/download-resume-for-specific-job",
+    documentController.downloadResumeForSpecificJob
+  );
 
   expressApp.use("/v1/documents", authenticateUser, documentRouter);
 }
