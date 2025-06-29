@@ -5,6 +5,7 @@ describe("Document Service", () => {
   beforeEach(() => {
     const documentRepository = {
       uploadResume: jest.fn().mockResolvedValue(undefined),
+      convertResumeToHTML: jest.fn().mockResolvedValue("<html></html>"),
     };
     documentService = new DocumentService(documentRepository);
   });
@@ -22,6 +23,7 @@ describe("Document Service", () => {
   it("should throw an error if upload fails", async () => {
     const documentRepository = {
       uploadResume: jest.fn().mockRejectedValue(new Error("Upload failed")),
+      convertResumeToHTML: jest.fn().mockResolvedValue("<html></html>"),
     };
     documentService = new DocumentService(documentRepository);
 
