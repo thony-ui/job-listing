@@ -9,6 +9,8 @@ export interface IJob {
   company: string;
   location: string;
   link: string;
+
+  jobDescription: string;
 }
 
 export function useGetJobs() {

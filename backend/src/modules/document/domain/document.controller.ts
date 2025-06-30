@@ -3,6 +3,7 @@ import { IUploadResume } from "./document.interface";
 import { DocumentService } from "./document.service";
 
 import type { NextFunction, Request, Response } from "express";
+import { jobDescriptionValidator } from "./document.validator";
 export class DocumentController {
   private documentService: DocumentService;
 
@@ -48,13 +49,18 @@ export class DocumentController {
       logger.info(
         `DocumentController: Downloading new resume for user ${req.user.id}`
       );
+      const { jobDescription } = jobDescriptionValidator(req.body);
       const userId = req.user.id;
-      const html = await this.documentService.convertResumeToHTML(userId);
-      const markdown = await this.documentService.convertResumeHTMLToMarkdown(
-        html as string
-      );
-      // mock the LLM call here
-      const updatedMarkdown = "Feature coming soon!";
+      const htmlResume = await this.documentService.convertResumeToHTML(userId);
+      const markdownResume =
+        await this.documentService.convertResumeHTMLToMarkdown(
+          htmlResume as string
+        );
+      const updatedMarkdown =
+        await this.documentService.generateUpdatedResumeMarkdown(
+          markdownResume,
+          jobDescription
+        );
       const updatedHtml =
         await this.documentService.convertResumeMarkdownToHTML(updatedMarkdown);
       const updatedReportPdfBuffer =

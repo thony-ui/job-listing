@@ -157,6 +157,7 @@ export default function HomePage() {
                     company={job.company}
                     location={job.location}
                     link={job.link}
+                    jobDescription={job.jobDescription}
                   />
                 ))}
               </div>

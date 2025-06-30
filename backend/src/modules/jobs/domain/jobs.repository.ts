@@ -7,7 +7,7 @@ export class JobsRepository implements IJobService {
     logger.info("Fetching jobs from database");
     const { data, error } = await supabase
       .from("jobs")
-      .select("id, title, company, location, link");
+      .select("id, title, company, location, link, jobDescription");
     if (error) {
       logger.error("Error fetching jobs:", error);
       return [];

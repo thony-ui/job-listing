@@ -14,6 +14,7 @@ describe("Jobs Service Positive test case", () => {
           company: "Tech Co",
           location: "Remote",
           link: "https://example.com/job1",
+          jobDescription: "Develop and maintain software applications.",
         },
         {
           id: "2",
@@ -21,6 +22,7 @@ describe("Jobs Service Positive test case", () => {
           company: "Data Inc",
           location: "Onsite",
           link: "https://example.com/job2",
+          jobDescription: "Analyze data and build predictive models.",
         },
       ]),
     } as unknown as JobsRepository;
@@ -35,6 +37,7 @@ describe("Jobs Service Positive test case", () => {
     expect(jobs[0]).toHaveProperty("company");
     expect(jobs[0]).toHaveProperty("location");
     expect(jobs[0]).toHaveProperty("link");
+    expect(jobs[0]).toHaveProperty("jobDescription");
   });
 });
 
@@ -67,6 +70,7 @@ describe("Jobs Controller Positive test case", () => {
           company: "Tech Co",
           location: "Remote",
           link: "https://example.com/job1",
+          jobDescription: "Develop and maintain software applications.",
         },
       ]),
     } as unknown as JobsService;
@@ -91,6 +95,7 @@ describe("Jobs Controller Positive test case", () => {
         company: "Tech Co",
         location: "Remote",
         link: "https://example.com/job1",
+        jobDescription: "Develop and maintain software applications.",
       },
     ]);
   });

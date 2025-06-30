@@ -12,18 +12,26 @@ interface JobCardProps {
   company: string;
   location: string;
   link: string;
+
+  jobDescription: string; // Optional, if you want to display job description later
 }
 
-export function JobCard({ title, company, location, link }: JobCardProps) {
+export function JobCard({
+  title,
+  company,
+  location,
+  link,
+  jobDescription,
+}: JobCardProps) {
   const handleApplyClick = () => {
     window.open(link, "_blank", "noopener,noreferrer");
   };
   const [isLoading, setIsLoading] = useState(false);
   const { mutateAsync: handleDownloadClick } =
-    useDownloadResumeForSpecificJob();
+    useDownloadResumeForSpecificJob(setIsLoading);
   const handleDownloadResume = async () => {
     try {
-      await handleDownloadClick(setIsLoading);
+      await handleDownloadClick(jobDescription);
       toast.success("Resume downloaded successfully!");
     } catch (error) {
       console.error("Failed to download resume:", error);
