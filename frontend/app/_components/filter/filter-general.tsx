@@ -47,7 +47,9 @@ export function GeneralFilter({
           aria-expanded={open}
           className="w-[250px] sm:w-[270px] justify-between text-gray-500"
         >
-          {selectedValue !== "" ? selectedValue : placeholder}
+          <p className="truncate">
+            {selectedValue !== "" ? selectedValue : placeholder}
+          </p>
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
